@@ -1,10 +1,15 @@
-import Register from './screens/home/register/register';
+import {AuthProvider} from './context/auth';
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './routes';
+
 
 export default function App() {
   return (
-    <>
-      <Register/>
-    </>
+    <NavigationContainer>
+      <AuthProvider>
+        <Routes/>
+      </AuthProvider>
+    </NavigationContainer>
   );
 }
 

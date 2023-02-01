@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     containerLogin: {
       justifyContent: 'center',
       padding: 30,
-      marginBottom: 25
+      marginBottom: 25,
     },
     containerImage: {
       alignItems: 'center',
@@ -24,8 +24,7 @@ export const styles = StyleSheet.create({
       backgroundColor: '#fff',
       borderRadius: 5,
       paddingLeft: 15,
-      marginBottom: 45,
-      fontFamily: 'Poppins_400Regular',
+      marginBottom: 5,
       paddingTop: 6,
     },
     btnCadastro:{
@@ -41,7 +40,6 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       textAlign: 'center',
       color: 'white',
-      fontFamily: 'Poppins_400Regular',
       fontWeight: '900',
       fontSize: 24,
     },
@@ -49,18 +47,25 @@ export const styles = StyleSheet.create({
       color: '#000000',
       fontWeight: '700',
       fontSize: 30,
-      fontFamily: 'Poppins_400Regular',
       textAlign: 'center',
       marginTop: 35,
-      marginBottom: 25
+      marginBottom: 10
     },
     textInputLabel:{
       fontSize: 20,
-      fontFamily: 'Poppins_400Regular',
       margin: 5
     },
     containerMessageAlert: {
       justifyContent: 'center',
       paddingStart: 90,
-    }
+    },
+    background: {
+        width: '100%',
+        height: '100%',
+    },
+    iconUser: {
+        position: "absolute",
+        top: 265,
+        left: 40,
+    },
 });
