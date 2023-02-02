@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       width: 300,
       height: 146,
-      marginTop: 80,
+      marginTop: 125,
       marginBottom: 10,
       marginLeft: 40
     },
@@ -23,18 +23,19 @@ export const styles = StyleSheet.create({
       height: 60,
       backgroundColor: '#fff',
       borderRadius: 5,
-      paddingLeft: 15,
-      marginBottom: 5,
+      paddingLeft: 35,
+      marginBottom: 30,
       paddingTop: 6,
     },
-    btnCadastro:{
+    btnLogin:{
       width: 215,
       height: 65,
       backgroundColor: 'white',
       borderRadius: 5,
       marginTop: 20,
       marginLeft: 55,
-      justifyContent: 'center',  
+      justifyContent: 'center',
+        
     },
     textBtn:{
       alignItems: 'center',
@@ -48,8 +49,8 @@ export const styles = StyleSheet.create({
       fontWeight: '700',
       fontSize: 30,
       textAlign: 'center',
-      marginTop: 35,
-      marginBottom: 10
+      marginTop: 15,
+      marginBottom: 5
     },
     textInputLabel:{
       fontSize: 20,
@@ -59,13 +60,14 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
       paddingStart: 90,
     },
-    background: {
-        width: '100%',
-        height: '100%',
-    },
     iconUser: {
-        position: "absolute",
-        top: 265,
-        left: 40,
+      position: "absolute",
+      top: 93,
+      left: 40,
+    },
+    iconPassowrd: {
+      position: "absolute",
+      top: 228,
+      left: 40,
     },
 });

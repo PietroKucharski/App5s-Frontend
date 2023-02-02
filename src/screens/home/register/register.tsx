@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import axios from 'axios';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
+import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const url = 'http://192.168.100.183:3000/'
+const url = 'http://192.168.100.209:3000/'
 
 export default function Register() {
   const [name, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   // const { setAuthenticated } = useContext(AuthContext);
+
 
   async function register() {
     const response = await axios({
@@ -31,14 +32,15 @@ export default function Register() {
     })
 
     if(response) {
-      AsyncStorage.setItem('token', JSON.stringify(response));
+      await AsyncStorage.setItem('token', JSON.stringify(response));
       // setAuthenticated(true);
       // navigation.navigate('DashboardAdmin');
     }
   }
 
+
   return (
-  <LinearGradient colors={['rgba(203,0,0,1)', 'transparent']} className='w-full flex-1'>
+  <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} className='w-full flex-1'>
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image  resizeMode='contain' source={require('../../../images/LogoKrah.png')} style={styles.containerImage}/>
@@ -70,7 +72,7 @@ export default function Register() {
           onPress={register}
           style={styles.btnCadastro}>
             <Text className='text-center text-xl'>
-              Cadastro
+              Cadastrar
             </Text>
           </TouchableOpacity>
         </View>
