@@ -29,10 +29,10 @@ export const styles = StyleSheet.create({
     },
     btnLogin:{
       width: 215,
-      height: 65,
+      height: 55,
       backgroundColor: 'white',
       borderRadius: 5,
-      marginTop: 20,
+      marginTop: 80,
       marginLeft: 55,
       justifyContent: 'center',
         
@@ -41,8 +41,8 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       textAlign: 'center',
       color: 'white',
-      fontWeight: '900',
-      fontSize: 24,
+      fontWeight: '600',
+      fontSize: 20,
     },
     titleLabel:{
       color: '#000000',
@@ -52,22 +52,18 @@ export const styles = StyleSheet.create({
       marginTop: 15,
       marginBottom: 5
     },
-    textInputLabel:{
-      fontSize: 20,
-      margin: 5
-    },
     containerMessageAlert: {
       justifyContent: 'center',
       paddingStart: 90,
     },
     iconUser: {
       position: "absolute",
-      top: 93,
+      top: 53,
       left: 40,
     },
     iconPassowrd: {
       position: "absolute",
-      top: 228,
+      top: 144,
       left: 40,
     },
 });

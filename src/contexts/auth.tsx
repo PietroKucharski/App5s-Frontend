@@ -1,30 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { createContext} from "react";
 import * as auth from '../services/auth';
 
 interface AuthContextData {
     signed: boolean;
-    signIn(): Promise<object>;
+    user: object;
+    signIn(email: string, password: string): Promise<void>;
 }
 
 type Props = {
     children?: React.ReactNode
 };
 
-
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<Props> = ( {children} ) => {
-    const email = ''
-    const password = ''
+    const [user, setUser] = useState({});
 
     async function signIn(email: string, password: string) {
         const response = await auth.default(email, password)
-
-        console.log(response);
+        setUser(response.request)
     }
     return (
-        <AuthContext.Provider value={{ signed: false, signIn}}>
+        <AuthContext.Provider value={{ signed: !!user, user, signIn}}>
             {children}
         </AuthContext.Provider>
     );
