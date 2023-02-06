@@ -12,8 +12,6 @@ export default function Register() {
   const [name, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  // const { setAuthenticated } = useContext(AuthContext);
-
 
   async function register() {
     const response = await axios({

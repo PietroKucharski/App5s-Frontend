@@ -1,24 +1,39 @@
 import axios from 'axios';
 
+const url = 'http://192.168.100.209:3000/';
 
-const url = 'http://192.168.100.209:3000/'
-
-export async function signIn(email: string, password: string) {
-    const request = await axios({
+export function authLogin(email: string, password: string) {
+    const response = axios({
         baseURL: url + 'auth/login',
         method: "POST",
-        timeout: 1000,
+        timeout: 10000,
         data: {
-            password,
-            email
+            email,
+            password
         },
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-    });
-
-    return {request}
+    })
+    return response;
 }
 
-export default signIn;
+export function authRegister(name: string, email: string, password: string) {
+    const response = axios({
+        baseURL: url + 'auth/register',
+        method: "POST",
+        timeout: 1000,
+        data: {
+          name,
+          password,
+          email
+        },
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+    })
+    return response
+
+}

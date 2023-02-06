@@ -8,7 +8,7 @@ const AppStack = createNativeStackNavigator();
 export default function AppRoutes() {
     return (
         <AppStack.Navigator>
-            <AppStack.Screen name="Register" component={Register}/>
+            <AppStack.Screen name="Register" component={Register} options={{headerShown:false}}/>
         </AppStack.Navigator>
     );
 }

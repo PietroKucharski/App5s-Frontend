@@ -4,22 +4,18 @@ import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, S
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-import SignIn from '../../../services/auth';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import axios from 'axios';
 import AuthContext from '../../../contexts/auth';
-
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signed, handleSignIn } = useContext(AuthContext);
+  console.log(signed);
 
-  const { signed, signIn } = useContext(AuthContext);
-  
-  // console.log(signed);
-
-  function handleSignIn() {
-    signIn(email, password);
+  function login() {
+    handleSignIn(email, password);
   }
   
   return (
@@ -36,7 +32,7 @@ export default function Login() {
             <TextInput secureTextEntry={true} placeholder='Código do cracha' style={styles.textInput} onChangeText={(text) => setPassword(text)}/>
             <Ionicons name='key' size={18} style={styles.iconPassowrd}/>
 
-            <TouchableOpacity style={styles.btnLogin} onPress={handleSignIn}>
+            <TouchableOpacity style={styles.btnLogin} onPress={login}>
               <Text style={styles.textBtn}>LOGAR</Text>
             </TouchableOpacity>
           </View>
