@@ -1,12 +1,14 @@
-import { AxiosResponse } from 'axios';
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState, useContext } from 'react'
 import * as auth from '../services/auth'
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../services/api';
 
 interface AuthContextData {
     signed: boolean,
-    handleSignIn(email: string, password: string): Promise<AxiosResponse<any, any>>;
-    handleSignOut(): void;
+    handleSignIn(email: string, password: string): Promise<void>,
+    handleSignOut(): void,
+    loading: boolean
 }
 
 type Props = {
@@ -17,22 +19,47 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC<Props> = ({ children }) => {
     const [user, setUser] = useState<object | null>(null);
+    const [loading, setLoading] = useState(true)
 
-    async function handleSignIn(email: string, password: string): Promise<AxiosResponse<any, any>> {
+    useEffect(() => {
+        async function loadStorageData() {
+            const storageUser = await AsyncStorage.getItem('user'); 
+            const storageToken = await AsyncStorage.getItem('token');
+            setLoading(false);
+
+            if(storageUser && storageToken) {
+                setUser(JSON.parse(storageUser));
+                setLoading(false);
+            }
+        }
+
+        loadStorageData();
+    }, [])
+
+    async function handleSignIn(email: string, password: string) {
         const response = await auth.authLogin(email, password);
-        setUser(response.data.accessToken)
-        return await response.data.accessToken;
+        setUser(response.data.userData)
+
+        await AsyncStorage.setItem('user', JSON.stringify(response.data.userData)); 
+        await AsyncStorage.setItem('token', response.data.token.accessToken);
+        console.log(response.headers)
     }
 
     function handleSignOut() {
-        setUser(null)
+        AsyncStorage.clear().then(() => {
+            setUser(null);
+        })
     }
 
     return(
-        <AuthContext.Provider value={{ signed: !!user, handleSignIn, handleSignOut }}>
+        <AuthContext.Provider value={{ signed: !!user, loading, handleSignIn, handleSignOut, }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export default AuthContext;
+export function useAuth() {
+    const context = useContext(AuthContext);
+
+    return context
+};

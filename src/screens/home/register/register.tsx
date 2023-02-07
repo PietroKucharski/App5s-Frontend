@@ -3,39 +3,22 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
 import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage'
-
-const url = 'http://192.168.100.209:3000/'
+import { createUsers } from '../../../services/auth';
+import { useAuth } from '../../../contexts/auth';
 
 export default function Register() {
   const [name, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const { handleSignOut } = useAuth();
 
-  async function register() {
-    const response = await axios({
-      baseURL: url + 'auth/register',
-      method: "POST",
-      timeout: 1000,
-      data: {
-        name,
-        password,
-        email
-      },
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-
-    if(response) {
-      await AsyncStorage.setItem('token', JSON.stringify(response));
-      // setAuthenticated(true);
-      // navigation.navigate('DashboardAdmin');
-    }
+  async function createUser() {
+    createUsers(name, email, password);
   }
 
+  function signOut() {
+    handleSignOut();
+  }
 
   return (
   <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} className='w-full flex-1'>
@@ -67,7 +50,7 @@ export default function Register() {
           style={styles.textInput}/>
                   
           <TouchableOpacity
-          onPress={register}
+          onPress={signOut}
           style={styles.btnCadastro}>
             <Text className='text-center text-xl'>
               Cadastrar

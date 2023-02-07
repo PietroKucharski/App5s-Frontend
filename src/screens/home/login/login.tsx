@@ -1,19 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert, Platform } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import axios from 'axios';
-import AuthContext from '../../../contexts/auth';
+import { useAuth } from '../../../contexts/auth';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signed, handleSignIn } = useContext(AuthContext);
-  console.log(signed);
-
+  const { handleSignIn } = useAuth();
+  
   function login() {
     handleSignIn(email, password);
   }

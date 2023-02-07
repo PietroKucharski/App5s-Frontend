@@ -1,60 +1,62 @@
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { styles } from './styles';
+import { useAuth } from '../../../contexts/auth';
+import { LinearGradient } from 'expo-linear-gradient';
 
-export default function DashboardAdmin() {
+export default function DashboardAdmin({ navigation }) {
+  const { handleSignOut } = useAuth();
 
-  async function handleLogout() {
+  function signOut() {
+    handleSignOut();
   }
 
  return (
-  <View style={styles.container}>
-    <Text style={styles.textLbl}>O que você deseja?</Text>
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.containerScroll}>
+  <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <Text style={styles.textLbl}>O que você deseja?</Text>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.containerScroll}>
 
-      <TouchableOpacity style={styles.btnOpcao}>
-        <Text style={styles.textBtn}>Realizar auditoria</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOpcao}>
+          <Text style={styles.textBtn}>Realizar auditoria</Text>
+        </TouchableOpacity>
 
-      {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Permissao')}>
-        <Text style={styles.textBtn}>Tipo de acesso do usuário</Text>
-      </TouchableOpacity> */}
+        {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Permissao')}>
+          <Text style={styles.textBtn}>Tipo de acesso do usuário</Text>
+        </TouchableOpacity> */}
 
-      {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Cadastro')}>
-        <Text style={styles.textBtn}>Cadastro de usuário</Text>
-      </TouchableOpacity> */}
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Cadastro')}>
+          <Text style={styles.textBtn}>Cadastro de usuário</Text>
+        </TouchableOpacity>
 
-      {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Checklist')}>
-        <Text style={styles.textBtn}>Cadastro de checklist</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Checklist')}>
+          <Text style={styles.textBtn}>Cadastro de checklist</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Consulta Checklist')}>
-        <Text style={styles.textBtn}>Consulta de checklist</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Consulta Checklist')}>
+          <Text style={styles.textBtn}>Consulta de checklist</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Perguntas')}>
-        <Text style={styles.textBtn}>Cadastro de perguntas</Text>
-      </TouchableOpacity>
+        {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Perguntas')}>
+          <Text style={styles.textBtn}>Cadastro de perguntas</Text>
+        </TouchableOpacity> */}
 
-      <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Consulta Perguntas')}>
-        <Text style={styles.textBtn}>Consulta de perguntas</Text>
-      </TouchableOpacity> */}
+        {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Consulta Perguntas')}>
+          <Text style={styles.textBtn}>Consulta de perguntas</Text>
+        </TouchableOpacity> */}
 
-      <TouchableOpacity style={styles.btnOpcao}>
-        <Text style={styles.textBtn}>Cadastro áreas</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.btnOpcao}>
+          <Text style={styles.textBtn}>Cadastro áreas</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity style={styles.btnOpcao} onPress={handleLogout}> 
-        <Text style={styles.textBtn}>Sair da conta</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <TouchableOpacity style={styles.btnOpcao} onPress={signOut}> 
+          <Text style={styles.textBtn}>Sair da conta</Text>
+        </TouchableOpacity>
 
-    <View style={styles.container}>
-      <Text>Informações sobre última auditoria</Text>
-    </View>
-
-    <StatusBar style="auto" />
-  </View>
+      </ScrollView>
+      <StatusBar style="auto" />
+    </KeyboardAvoidingView>
+  </LinearGradient>
   );
 }
