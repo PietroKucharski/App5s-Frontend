@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Text, StatusBar, View, TouchableOpacity, Image, TextInput } from 'react-native';
-// import CheckBox from '../components/checkBox';
 import { createChecklists } from '../../../services/auth';
-import { styles } from './styles';
 import { LinearGradient } from 'expo-linear-gradient';
+import { styles } from './styles';
 
 export default function CheckList() {
     const [checklistName, setChecklistName] = useState('')
   
     async function createChecklist() {
         const response = await createChecklists(checklistName)
-        console.log(response.data)
         return response
     }
     return (

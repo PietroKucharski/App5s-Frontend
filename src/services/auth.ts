@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const url = 'http://192.168.100.57:3000/';
+const url = 'http://192.168.100.171:3000/';
 
 export function authLogin(email: string, password: string) {
     const response = axios({
@@ -57,7 +57,8 @@ export async function createChecklists(name: string) {
     return response
 }
 
-export function getChecklists(name: string) {
+export async function getChecklists() {
+    const token = await AsyncStorage.getItem('token')
     const response = axios({
         baseURL: url + 'checklists/',
         method: 'GET',
@@ -65,13 +66,14 @@ export function getChecklists(name: string) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-
+            'Authorization': `Bearer ${token}`
         }
     });
     return response
 }
 
-export function createQuestions(question: string) {
+export async function createQuestions(question: string) {
+    const token = await AsyncStorage.getItem('token')
     const response = axios({
         baseURL: url + 'questions/',
         method: 'POST',
@@ -81,7 +83,23 @@ export function createQuestions(question: string) {
         },
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    return response
+}
+
+export async function getQuestions() {
+    const token = await AsyncStorage.getItem('token')
+    const response = axios({
+        baseURL: url + 'questions/',
+        method: 'GET',
+        timeout: 1000,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         }
     });
     return response

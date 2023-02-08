@@ -3,21 +3,22 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "100%",
   },
   btnOpcao: {
     backgroundColor: 'white',
     height: 60,
-    justifyContent: 'center',
     borderRadius: 5,
-    width: 150,
+    width: '90%',
     marginRight: 15,
-    marginLeft: 15
+    marginLeft: 15,
+    justifyContent: "center",
+    marginBottom: 25
   },
   textBtn:{
     alignItems: 'center',
     textAlign: 'center',
     color: 'white',
-    // fontFamily: 'Poppins_400Regular',
     fontWeight: '900',
     fontSize: 14,
   },
@@ -25,14 +26,21 @@ export const styles = StyleSheet.create({
     color: '#000000',
     fontWeight: '700',
     fontSize: 30,
-    // fontFamily: 'Poppins_400Regular',
     textAlign: 'center',
-    marginTop: 75,
+    marginTop: 25,
     marginBottom: 30,
   },
   containerScroll: {
-    maxHeight: 65,
+    height: '58%',
     marginBottom: 14,
     marginTop: 10,
+  },
+  containerImage: {
+    alignItems: 'center',
+    width: 300,
+    height: 146,
+    marginTop: 80,
+    marginBottom: 10,
+    marginLeft: 40
   },
 });

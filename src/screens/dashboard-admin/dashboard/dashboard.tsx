@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import { styles } from './styles';
 import { useAuth } from '../../../contexts/auth';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -15,18 +15,19 @@ export default function DashboardAdmin({ navigation }) {
  return (
   <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
       <Text style={styles.textLbl}>O que você deseja?</Text>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.containerScroll}>
+      <ScrollView horizontal={false} showsVerticalScrollIndicator={false} style={styles.containerScroll}>
 
         <TouchableOpacity style={styles.btnOpcao}>
           <Text style={styles.textBtn}>Realizar auditoria</Text>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Permissao')}>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Permissao')}>
           <Text style={styles.textBtn}>Tipo de acesso do usuário</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Cadastro')}>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Register')}>
           <Text style={styles.textBtn}>Cadastro de usuário</Text>
         </TouchableOpacity>
 
@@ -34,17 +35,17 @@ export default function DashboardAdmin({ navigation }) {
           <Text style={styles.textBtn}>Cadastro de checklist</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Consulta Checklist')}>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('ChecklistConfer')}>
           <Text style={styles.textBtn}>Consulta de checklist</Text>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Perguntas')}>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Question')}>
           <Text style={styles.textBtn}>Cadastro de perguntas</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Consulta Perguntas')}>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('QuestionConfer')}>
           <Text style={styles.textBtn}>Consulta de perguntas</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.btnOpcao}>
           <Text style={styles.textBtn}>Cadastro áreas</Text>
