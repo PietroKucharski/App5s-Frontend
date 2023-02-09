@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Text, StatusBar, View, TouchableOpacity, Image, TextInput } from 'react-native';
-import { createChecklists } from '../../../services/auth';
+import { createAreas } from '../../../services/auth';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
 
-export default function CheckList() {
-    const [checklistName, setChecklistName] = useState('')
+export default function Area() {
+    const [areaDescription, setAreaDescription] = useState('')
   
-    async function createChecklist() {
-        const response = await createChecklists(checklistName)
+    async function createArea() {
+        const response = await createAreas(areaDescription)
         return response
     }
     return (
@@ -16,12 +16,12 @@ export default function CheckList() {
             <View>
                 <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
                 <View style={styles.containerLbl}>
-                    <Text style={styles.textLbl}>Faça o cadastro de um checklist</Text>
+                    <Text style={styles.textLbl}>Faça o cadastro da area</Text>
 
-                    <TextInput placeholder='Digite o nome do checklist' style={styles.textInput} onChangeText={(text) => setChecklistName(text)}/>
+                    <TextInput placeholder='Digite o nome da area' style={styles.textInput} onChangeText={(text) => setAreaDescription(text)}/>
 
                     <View style={styles.containerBtn}>
-                        <TouchableOpacity style={styles.botao} onPress={createChecklist}>
+                        <TouchableOpacity style={styles.botao} onPress={createArea}>
                             <Text style={styles.textBtn}>Cadastrar</Text>
                         </TouchableOpacity>
                     </View>

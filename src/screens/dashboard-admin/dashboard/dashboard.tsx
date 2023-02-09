@@ -47,7 +47,11 @@ export default function DashboardAdmin({ navigation }) {
           <Text style={styles.textBtn}>Consulta de perguntas</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnOpcao}>
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('ChecklistQuestion')}>
+          <Text style={styles.textBtn}>Cadastro de checklist/pergunta</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Area')}>
           <Text style={styles.textBtn}>Cadastro áreas</Text>
         </TouchableOpacity>
 

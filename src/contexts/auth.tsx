@@ -51,7 +51,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
         await AsyncStorage.setItem('user', JSON.stringify(response.data.userData)); 
         await AsyncStorage.setItem('token', response.data.token.accessToken);
-        console.log(response.headers)
+
+        console.log(response.data.userData.role);
     }
 
     function handleSignOut() {

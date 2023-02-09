@@ -5,7 +5,7 @@ import AppRoutes from './app.routes';
 import { View, ActivityIndicator } from 'react-native'
 
 export default function Routes() {
-    const { signed, loading } = useAuth();
+    const { signed, loading, user } = useAuth();
 
     if(loading) {
         return (

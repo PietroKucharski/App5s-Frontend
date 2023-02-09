@@ -16,9 +16,9 @@ export default function Question() {
  return (
     <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
         <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
-        <Text style={styles.textLblPermission}>Faça o cadastro das perguntas</Text>
+        <Text style={styles.textLblPermission}>Faça o cadastro da pergunta</Text>
 
-        <TextInput placeholder='Pergunta' style={styles.textInput} onChangeText={(text) => setQuestion(text)}/>
+        <TextInput placeholder='Digite a pergunta' style={styles.textInput} onChangeText={(text) => setQuestion(text)}/>
     
         <TouchableOpacity style={styles.btnCadastro} onPress={createQuestion}>
             <Text style={styles.textBtn}>Cadastrar</Text>

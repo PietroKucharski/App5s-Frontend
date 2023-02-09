@@ -121,3 +121,39 @@ export function createChecklistQuestions(checklistId: number, questionId: number
     });
     return response
 }
+
+export async function createAreas(description: string) {
+    const token = await AsyncStorage.getItem('token')
+    const response = axios({
+        baseURL: url + 'areas/',
+        method: 'POST',
+        timeout: 1000,
+        data: {
+            description
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    return response
+}
+
+export async function createAudits(name: string) {
+    const token = await AsyncStorage.getItem('token')
+    const response = axios({
+        baseURL: url + 'checklists/',
+        method: 'POST',
+        timeout: 1000,
+        data: {
+            name
+        },
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    return response
+}
