@@ -1,14 +1,14 @@
-import { View, Text } from 'react-native'
 import React, { useState } from 'react'
-import Select from '../../../components/select/select'
-import { styles } from './styles'
+import { View, Text, FlatList, SafeAreaView, TouchableOpacity } from 'react-native'
+import { styles } from './Styles'
 import { LinearGradient } from 'expo-linear-gradient';
-import { getChecklists, getQuestions } from '../../../services/auth';
+import { createChecklistQuestions, getChecklists, getQuestions } from '../../../services/Auth';
+import Cards from '../../../components/cards/Card';
+import Select from '../../../components/select/Select'
 
 export default function ChecklistQuestion() {
-    const [checklistID, setChecklistId] = useState();
-    
-    const [questionID, setQuestionID] = useState();
+    const [checklistId, setChecklistId] = useState();
+    const [questionId, setQuestionId] = useState();
 
     async function getChecklist() {
       const response = await getChecklists()
@@ -16,24 +16,53 @@ export default function ChecklistQuestion() {
     }
 
     async function getQuestion() {
-
         const response = await getQuestions();
 
         for(let i = 0; i < response.data.length; i++) {
-            setQuestionID(response.data[i].question) // Retorna as perguntas
+            setQuestionId(response.data[i].question)
         }
 
-        setQuestionID(response.data) // Retorna um array de objetos de todas as informações das perguntas
+        setQuestionId(response.data)
     }
+
+    async function createChecklistQuestion() {
+        const response = await createChecklistQuestions(questionId, checklistId)
+        return response
+    }
+
 
     return (
         <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
             <View>
-                <Select options={checklistID} onChangeSelect={(id) => alert(id)} value='Selecione um checklist'>
+                <Select
+                options={checklistId}
+                onChangeSelect={(id: any) => setChecklistId(id)}
+                value='Selecione um checklist' label='Escolha o checklist'/>
+                
+                <TouchableOpacity style={styles.button} onPress={getChecklist}>
+                    <Text style={styles.textBtn}>Consultar</Text>
+                </TouchableOpacity>
 
-                </Select>
+                <Text style={styles.textLabel}>Escolha as perguntas desejadas</Text>
+
+                <SafeAreaView style={styles.containerSafeArea}>
+                    <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={questionId}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({item}) => <Cards value={item.question}></Cards>}/>
+                </SafeAreaView>
+
+                <View style={styles.containerBtn}>
+                    <TouchableOpacity style={styles.buttonSafeArea} onPress={createChecklistQuestion}>
+                        <Text style={styles.textBtn}>Cadastrar</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.buttonSafeArea} onPress={getQuestion}>
+                        <Text style={styles.textBtn}>Consultar</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-
         </LinearGradient>
     )
 }

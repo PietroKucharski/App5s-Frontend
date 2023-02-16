@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from './styles';
+import { styles } from './Styles';
 import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
-import { createUsers } from '../../../services/auth';
-import { useAuth } from '../../../contexts/auth';
+import { createUsers } from '../../../services/Auth';
+import { useAuth } from '../../../contexts/Auth';
 
 export default function Register() {
   const [name, setUser] = useState('');

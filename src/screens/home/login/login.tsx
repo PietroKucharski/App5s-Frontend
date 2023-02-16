@@ -1,28 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
+import { View, TextInput, TouchableOpacity, Platform, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { styles } from './styles';
+import { styles } from './Styles';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useAuth } from '../../../contexts/auth';
+import { useAuth } from '../../../contexts/Auth';
+import { VStack, ScrollView, Button, Text, Input, KeyboardAvoidingView  } from 'native-base'
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { handleSignIn } = useAuth();
   
-  function login() {
-    handleSignIn(email, password);
+  async function login() {
+    const response = await handleSignIn(email, password);
+    return response;
   }
   
   return (
     <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} className='w-full flex-1'>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} justifyContent={'center'}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
-          <Text style={styles.titleLabel}>KRAH BRASIL</Text>
+
+        <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
+          <Text fontSize={30} textAlign={'center'} marginTop={15} marginBottom={5} fontWeight={700}>KRAH BRASIL</Text>
           
-          <View style={styles.containerLogin}>
+          <VStack style={styles.containerLogin}>
             <TextInput placeholder='Email do usuário' style={styles.textInput} onChangeText={(text) => setEmail(text)} autoCapitalize='none'/>
             <Ionicons name='people' size={18} style={styles.iconUser}/>
 
@@ -32,7 +35,7 @@ export default function Login() {
             <TouchableOpacity style={styles.btnLogin} onPress={login}>
               <Text style={styles.textBtn}>LOGAR</Text>
             </TouchableOpacity>
-          </View>
+          </VStack>
         </ScrollView>
         <StatusBar style="auto" />
       </KeyboardAvoidingView>

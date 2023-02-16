@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StatusBar, View, FlatList, SafeAreaView, TouchableOpacity, Image } from 'react-native';
-import { styles } from './styles';
+import { styles } from './Styles';
 import { LinearGradient } from 'expo-linear-gradient';
-import { getChecklists } from '../../../services/auth';
-import Cards from '../../../components/cards/cards';
+import { getChecklists } from '../../../services/Auth';
+import Cards from '../../../components/cards/Card';
 
 export default function ChecklistConfer() {
   const [data, setData] = useState();

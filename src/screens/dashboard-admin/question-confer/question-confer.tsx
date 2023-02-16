@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, SafeAreaView, Image, ActivityIndicator } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from './styles';
-import { getQuestions } from '../../../services/auth';
-import Cards from '../../../components/cards/cards';
+import { styles } from './Styles';
+import { getQuestions } from '../../../services/Auth';
+import Cards from '../../../components/cards/Card';
 
 export default function QuestionConfer() {
     const [data, setData] = useState();

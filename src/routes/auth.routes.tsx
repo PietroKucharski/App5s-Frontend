@@ -1,5 +1,5 @@
 import React  from "react";
-import Login from "../screens/home/login/login";
+import Login from "../screens/home/login/Login";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 

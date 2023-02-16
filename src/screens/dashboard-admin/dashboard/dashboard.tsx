@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Image } from 'react-native';
-import { styles } from './styles';
-import { useAuth } from '../../../contexts/auth';
+import { Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Image } from 'react-native';
+import { styles } from './Styles';
+import { useAuth } from '../../../contexts/Auth';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function DashboardAdmin({ navigation }) {
+export default function DashboardAdmin({ navigation }: any) {
   const { handleSignOut } = useAuth();
 
   function signOut() {

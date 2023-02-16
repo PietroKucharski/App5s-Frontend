@@ -1,14 +1,14 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React  from "react";
-import DashboardAdmin from "../screens/dashboard-admin/dashboard/dashboard";
-import CheckList from "../screens/dashboard-admin/checklist/checklist";
-import Register from "../screens/home/register/register";
-import ChecklistConfer from "../screens/dashboard-admin/checklist-confer/checklist-confer";
-import Question from "../screens/dashboard-admin/question/question";
-import QuestionConfer from "../screens/dashboard-admin/question-confer/question-confer";
-import { useAuth } from "../contexts/auth";
-import Area from "../screens/dashboard-admin/area/area";
-import ChecklistQuestion from "../screens/dashboard-admin/checklist-question/checklist-question";
+import DashboardAdmin from "../screens/dashboard-admin/dashboard/Dashboard";
+import CheckList from "../screens/dashboard-admin/checklist/Checklist";
+import Register from "../screens/home/register/Register";
+import ChecklistConfer from "../screens/dashboard-admin/checklist-confer/Checklist-Confer";
+import Question from "../screens/dashboard-admin/question/Question";
+import QuestionConfer from "../screens/dashboard-admin/question-confer/Question-Confer";
+import { useAuth } from "../contexts/Auth";
+import Area from "../screens/dashboard-admin/area/Area";
+import ChecklistQuestion from "../screens/dashboard-admin/checklist-question/Checklist-Question";
 
 const AppStack = createNativeStackNavigator();
 

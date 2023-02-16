@@ -105,7 +105,8 @@ export async function getQuestions() {
     return response
 }
 
-export function createChecklistQuestions(checklistId: number, questionId: number) {
+export async function createChecklistQuestions(checklistId: undefined, questionId: undefined) {
+    const token = await AsyncStorage.getItem('token')
     const response = axios({
         baseURL: url + 'checklists-questions/',
         method: 'POST',
@@ -116,7 +117,8 @@ export function createChecklistQuestions(checklistId: number, questionId: number
         },
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         }
     });
     return response

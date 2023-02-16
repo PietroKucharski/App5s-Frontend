@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Text, StatusBar, View, TouchableOpacity, Image, TextInput } from 'react-native';
-import { createAreas } from '../../../services/auth';
+import { createAreas } from '../../../services/Auth';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from './styles';
+import { styles } from './Styles';
 
 export default function Area() {
     const [areaDescription, setAreaDescription] = useState('')

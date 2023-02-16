@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Image, Alert } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { styles } from './styles';
+import { styles } from './Styles';
 import { LinearGradient } from 'expo-linear-gradient';
-import { createQuestions } from '../../../services/auth';
+import { createQuestions } from '../../../services/Auth';
 
 export default function Question() {
   const [question, setQuestion] = useState('');
