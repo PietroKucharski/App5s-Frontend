@@ -1,31 +1,54 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, Image, Alert } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { styles } from './Styles';
+import * as yup from 'yup'
+import React from 'react';
+import { Center, Heading, Icon, NativeBaseProvider, VStack, Image, Pressable } from "native-base";
+import { Button } from "../../../components/Button";
+import  { Input } from '../../../components/Input';
+import {  Controller, useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { ClipboardText, CheckSquare } from 'phosphor-react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { createQuestions } from '../../../services/Auth';
 
-export default function Question() {
-  const [question, setQuestion] = useState('');
-
-  async function createQuestion() {
-    const response = await createQuestions(question);
-    return response
-  }
-
- return (
-    <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
-        <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
-        <Text style={styles.textLblPermission}>Faça o cadastro da pergunta</Text>
-
-        <TextInput placeholder='Digite a pergunta' style={styles.textInput} onChangeText={(text) => setQuestion(text)}/>
-    
-        <TouchableOpacity style={styles.btnCadastro} onPress={createQuestion}>
-            <Text style={styles.textBtn}>Cadastrar</Text>
-        </TouchableOpacity>
-        <StatusBar style="auto" />
-    </LinearGradient>
-
-  );
+type FormDataProps = {
+    question: string
 }
 
+const questionSchema = yup.object({
+    question: yup.string().required('Informe a pergunta'),
+})
+
+export default function Question() {
+    const { control, handleSubmit, formState: {errors} } = useForm<FormDataProps>({ resolver: yupResolver(questionSchema) });
+    const img = require('../../../images/LogoKrah.png');
+
+    async function handelSubmitQuestion(data: FormDataProps) {
+        const response = await createQuestions(data.question)
+        return response
+    }
+
+    return (
+        <NativeBaseProvider>
+            <LinearGradient colors={['#ffffff', '#ffffff', '#ffffff']} style={{flex: 1}}>
+            <VStack flex={1} px={4}>
+                <Center h='full'>
+                    <Image alt='Logo Krah' source={img} size={150} mb={'50px'}/>
+                    <Heading mb={'50px'}>
+                        Faça o cadastro de perguntas
+                    </Heading>
+
+                    <Controller control={control}
+                        name='question'
+                        render={({ field : { onChange }}) => (
+                            <Input placeholder="Pergunta" onChangeText={onChange} errorMessage={errors.question?.message}
+                            InputLeftElement={<Icon as={<ClipboardText/>} size={16} ml='2' color="muted.400"/>} />
+                        )}
+                    />
+
+                    <Button title="Logar" onPress={handleSubmit(handelSubmitQuestion)}
+                    leftIcon={<Icon as={<CheckSquare/>} size={16} color="muted.400"/>} />
+                </Center>
+            </VStack>
+            </LinearGradient>
+        </NativeBaseProvider>
+    );
+}

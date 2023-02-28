@@ -1,42 +1,52 @@
+
 import React, { useEffect, useState } from 'react';
-import { Text, StatusBar, View, FlatList, SafeAreaView, TouchableOpacity, Image } from 'react-native';
-import { styles } from './Styles';
+import { Center, Heading, Icon, NativeBaseProvider, VStack, Image, Box, FlatList, Text, Container} from "native-base";
+import { Button } from "../../../components/Button";
+import { MagnifyingGlass, CheckSquare } from 'phosphor-react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { getChecklists } from '../../../services/Auth';
 import Cards from '../../../components/cards/Card';
 
-export default function ChecklistConfer() {
+export default function Checklist() {
+  const img = require('../../../images/LogoKrah.png');
   const [data, setData] = useState();
-
+  const [loading, setLoading] = useState(false);
+  
 
   async function getChecklist() {
     const response = await getChecklists()
+
     setData(response.data)
+    
   }
 
+  function renderItem({item}: any) {
+    return (
+      <Box height={20} width={300}>
+        <Cards value={item.name}/>
+      </Box>
+    );
+  }
+
+
   return (
-    <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
-      <View>
-        <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
-        <View style={styles.containerLbl}>
-          <Text style={styles.textLbl}>Consulta de Checklist</Text>
+    <NativeBaseProvider>
+      <LinearGradient colors={['#ffffff', '#ffffff', '#ffffff']} style={{flex: 1}}>
+        <VStack flex={1} px={5}>
+            <Center h='full'>
 
-          <SafeAreaView style={styles.containerSafeArea}>
-            <FlatList
-            showsVerticalScrollIndicator={false}
-            data={data} 
-            keyExtractor={(item) => item.id} 
-            renderItem={({item}) => <Cards value={item.name}></Cards>}/>
-          </SafeAreaView>
+              <Image alt='Logo Krah' source={img} size={150} mt={'50px'} mb={'50px'}/>
+              <Heading mb={'40px'}>
+                  Consulta de checklist
+              </Heading>
 
-          <View style={styles.containerBtn}>
-            <TouchableOpacity style={styles.botao} onPress={getChecklist}>
-              <Text style={styles.textBtn}>Consultar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <StatusBar/>  
-      </View>
-    </LinearGradient>
+      
+              <FlatList data={data} renderItem={renderItem} borderWidth={1} w={350} paddingLeft={5} paddingTop={4}/>
+
+              <Button title="Consultar" onPress={getChecklist} leftIcon={<Icon as={<MagnifyingGlass/>} size={16} color="muted.400"/>} mt={'50px'} mb={'50px'}/>
+            </Center>
+        </VStack>
+      </LinearGradient>
+    </NativeBaseProvider>
   );
 }

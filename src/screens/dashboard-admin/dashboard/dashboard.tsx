@@ -1,67 +1,44 @@
-import React, { useContext } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Text, TouchableOpacity, ScrollView, KeyboardAvoidingView, Platform, Image } from 'react-native';
-import { styles } from './Styles';
-import { useAuth } from '../../../contexts/Auth';
+import { Center, NativeBaseProvider, VStack, ScrollView, Heading, Image, Pressable } from "native-base";
+import { Button } from "../../../components/Button";
 import { LinearGradient } from 'expo-linear-gradient';
+import { StatusBar } from 'expo-status-bar';
+import { useAuth } from "../../../contexts/Auth";
 
 export default function DashboardAdmin({ navigation }: any) {
-  const { handleSignOut } = useAuth();
+    const img = require('../../../images/LogoKrah.png');
+    const { handleSignOut } = useAuth();
 
-  function signOut() {
-    handleSignOut();
-  }
+    function signOut() {
+      handleSignOut();
+    }
 
- return (
-  <LinearGradient colors={['#6e0000', '#f60000', '#c40000']} style={styles.container}>
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <Image style={styles.containerImage}  resizeMode='contain' source={require('../../../images/LogoKrah.png')}/>
-      <Text style={styles.textLbl}>O que você deseja?</Text>
-      <ScrollView horizontal={false} showsVerticalScrollIndicator={false} style={styles.containerScroll}>
+    return (
+      <NativeBaseProvider>
+        <LinearGradient colors={['#ffffff', '#ffffff', '#ffffff']} style={{flex: 1}}>
+          <ScrollView showsVerticalScrollIndicator={false}>
 
-        <TouchableOpacity style={styles.btnOpcao}>
-          <Text style={styles.textBtn}>Realizar auditoria</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Permissao')}>
-          <Text style={styles.textBtn}>Tipo de acesso do usuário</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.textBtn}>Cadastro de usuário</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Checklist')}>
-          <Text style={styles.textBtn}>Cadastro de checklist</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('ChecklistConfer')}>
-          <Text style={styles.textBtn}>Consulta de checklist</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Question')}>
-          <Text style={styles.textBtn}>Cadastro de perguntas</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('QuestionConfer')}>
-          <Text style={styles.textBtn}>Consulta de perguntas</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('ChecklistQuestion')}>
-          <Text style={styles.textBtn}>Cadastro de checklist/pergunta</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={() => navigation.navigate('Area')}>
-          <Text style={styles.textBtn}>Cadastro áreas</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.btnOpcao} onPress={signOut}> 
-          <Text style={styles.textBtn}>Sair da conta</Text>
-        </TouchableOpacity>
-
-      </ScrollView>
-      <StatusBar style="auto" />
-    </KeyboardAvoidingView>
-  </LinearGradient>
-  );
+            <Center>
+              <Image alt='Logo Krah' source={img} size={150} mt={'75px'} />
+              <Heading mt={'30px'} mb={'40px'}>Escolha uma opção</Heading>
+            </Center>
+          
+            <VStack flex={1} px={5}>
+              <Center>
+                <Button title='Realizar auditoria' mb={3}/>
+                <Button title='Trocar tipo de acesso do usuário' mb={3} onPress={() => navigation.navigate('Permissao')}/>
+                <Button title='Cadastro de usuário' mb={3} onPress={() => navigation.navigate('SignUp')}/>
+                <Button title='Cadastro de checklist' mb={3} onPress={() => navigation.navigate('Checklist')}/>
+                <Button title='Consulta de checklist' mb={3} onPress={() => navigation.navigate('ChecklistConfer')}/>
+                <Button title='Cadastro de perguntas' mb={3} onPress={() => navigation.navigate('Question')}/>
+                <Button title='Consulta de perguntas' mb={3} onPress={() => navigation.navigate('QuestionConfer')}/>
+                <Button title='Cadastro de checklist/perguntas' mb={3} onPress={() => navigation.navigate('ChecklistQuestion')}/>
+                <Button title='Cadastro de áreas' mb={3} onPress={() => navigation.navigate('Area')}/>
+                <Button title='Sair da conta' mb={3} bg={'red.400'} _pressed={{bgColor: 'red.500'}} onPress={signOut}/>
+              </Center>
+            </VStack>
+          </ScrollView>
+          <StatusBar style="auto" />
+        </LinearGradient>
+      </NativeBaseProvider>
+    );
 }
